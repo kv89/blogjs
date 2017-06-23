@@ -18,6 +18,10 @@ app.config(['$locationProvider', '$routeProvider',
             templateUrl: 'partials/post.list.html',
             controller: 'PostListCtrl'
         }).
+        when('/about', {
+            templateUrl: 'partials/admin.about.html',
+            controller: 'AdminAboutCtrl'
+        }).
         when('/post/:id', {
             templateUrl: 'partials/post.view.html',
             controller: 'PostViewCtrl'

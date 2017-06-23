@@ -19,10 +19,40 @@
     <body ng-app="app">
 
         <div class="container col-sm-12">
+                <h4 class="pull-right inline">
+                    <a href="#/admin/login" ng-if="isAuthenticated == false;" class="btn-link">
+                        login
+                    </a>
+                    <div ng-if="isAuthenticated">
+                        <div class="btn-group">
+                          <button class="btn btn-xs dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Menu <span class="caret"></span>
+                          </button>
+                          <ul class="dropdown-menu dropdown-menu-right">
+                            <li>
+                                <a href="#/admin/post/create" class="btn-xs btn-link">
+                                    New Post
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#/admin" class="btn-xs btn-link">
+                                    Manage Posts
+                                </a>
+                            </li>
+                            <li role="separator" class="divider"></li>
+                            <li>
+                                <a href="#/admin/logout"  class="btn-xs btn-link">
+                                    Log Out
+                                </a>
+                            </li>
+                          </ul>
+                        </div>
+                    </div>
+                </h4>
 
             <header class="header">
                 <h1 class="header-title">
-                    <a href="#">
+                    <a href="#/about">
                         <i class="fa fa-code"></i> Kevin Delemme
                     </a>
                 </h1>

@@ -1,0 +1,11 @@
+npm install --global --production windows-build-tools - from admin cmd!!
+
+http://mxstbr.com/
+
+changes : npm install http-server
+then in public folder of http-server, copu all under app folder of code!
+then if some error, instead of build/release/bson, browser/bson in require of some file in node_modules..
+
+then, base_url : ..:3001
+then, access-control-allow-origin - http://127.0.0.1:8080 -> this is where ui app on http-server is runing !
+..

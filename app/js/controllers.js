@@ -1,18 +1,26 @@
-appControllers.controller('PostListCtrl', ['$scope', '$sce', 'PostService',
-    function PostListCtrl($scope, $sce, PostService) {
+appControllers.controller('PostListCtrl', ['$rootScope', '$scope', '$sce', 'PostService','AuthenticationService',
+    function PostListCtrl($rootScope, $scope, $sce, PostService, AuthenticationService) {
 
         $scope.posts = [];
-
+        $rootScope.isAuthenticated = AuthenticationService.isAuthenticated;
         PostService.findAllPublished().success(function(data) {
             for (var postKey in data) {
                 data[postKey].content = $sce.trustAsHtml(data[postKey].content);
             }
 
-            $scope.posts = data;            
+            $scope.posts = data;  
+            console.log("Total posts : ", data);          
         }).error(function(data, status) {
             console.log(status);
             console.log(data);
         });
+    }
+]);
+
+appControllers.controller('AdminAboutCtrl', ['$scope',
+    function AdminAboutCtrl($scope) {
+        $scope.aboutMe = ".............. All About Me .............";
+        
     }
 ]);
 
@@ -186,8 +194,8 @@ appControllers.controller('AdminPostEditCtrl', ['$scope', '$routeParams', '$loca
     }
 ]);
 
-appControllers.controller('AdminUserCtrl', ['$scope', '$location', '$window', 'UserService', 'AuthenticationService',  
-    function AdminUserCtrl($scope, $location, $window, UserService, AuthenticationService) {
+appControllers.controller('AdminUserCtrl', ['$rootScope', '$scope', '$location', '$window', 'UserService', 'AuthenticationService',  
+    function AdminUserCtrl($rootScope, $scope, $location, $window, UserService, AuthenticationService) {
 
         //Admin User Controller (signIn, logOut)
         $scope.signIn = function signIn(username, password) {
@@ -195,8 +203,10 @@ appControllers.controller('AdminUserCtrl', ['$scope', '$location', '$window', 'U
 
                 UserService.signIn(username, password).success(function(data) {
                     AuthenticationService.isAuthenticated = true;
+                    $rootScope.isAuthenticated = true;
                     $window.sessionStorage.token = data.token;
                     $location.path("/admin");
+
                 }).error(function(status, data) {
                     console.log(status);
                     console.log(data);
